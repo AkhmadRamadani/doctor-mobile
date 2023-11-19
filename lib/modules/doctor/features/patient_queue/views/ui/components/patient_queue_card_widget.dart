@@ -2,6 +2,7 @@ import 'package:doctor_mobile/core/extensions/date_extensions.dart';
 import 'package:doctor_mobile/modules/doctor/features/patient_queue/models/responses/get_all_reservations_response.dart';
 import 'package:doctor_mobile/modules/doctor/features/patient_queue/views/ui/components/status_pile_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 
 class PatientQueueCardWidget extends StatelessWidget {
   const PatientQueueCardWidget({
@@ -170,6 +171,36 @@ class PatientQueueCardWidget extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          Conditional.single(
+            context: context,
+            conditionBuilder: (context) => item?.status == 3,
+            widgetBuilder: (context) => Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 8,
+                ),
+                const Text(
+                  'Alasan',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  (item?.rejectReason ?? '').isNotEmpty
+                      ? (item?.rejectReason ?? '-')
+                      : '-',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+            fallbackBuilder: (_) => const SizedBox(),
           ),
         ],
       ),

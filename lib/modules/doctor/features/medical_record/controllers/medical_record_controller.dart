@@ -44,16 +44,6 @@ class MedicalRecordController extends GetxController {
   }
 
   void createMedicalRecord() {
-    if (selectedIcds == null) {
-      Get.snackbar(
-        'Perhatian',
-        'Mohon pilih kode ICD terlebih dahulu',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
-      return;
-    }
-
     if (complaintController.text.isEmpty) {
       Get.snackbar(
         'Perhatian',
@@ -108,16 +98,6 @@ class MedicalRecordController extends GetxController {
       Get.snackbar(
         'Perhatian',
         'Mohon isi resep terlebih dahulu',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
-      return;
-    }
-
-    if (noteController.text.isEmpty) {
-      Get.snackbar(
-        'Perhatian',
-        'Mohon isi catatan terlebih dahulu',
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
