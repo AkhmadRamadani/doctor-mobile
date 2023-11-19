@@ -2,6 +2,7 @@ import 'package:doctor_mobile/core/services/dialog_service.dart';
 import 'package:doctor_mobile/modules/doctor/constants/doctor_routes_const.dart';
 import 'package:doctor_mobile/modules/doctor/features/patient_queue/models/responses/get_all_reservations_response.dart';
 import 'package:doctor_mobile/modules/doctor/features/patient_queue/repositories/patient_queue_repository.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class DetailQueueController extends GetxController {
@@ -10,6 +11,7 @@ class DetailQueueController extends GetxController {
   ItemAllReservations? item;
 
   final PatientQueueRepository _repository = PatientQueueRepository();
+  TextEditingController noteController = TextEditingController();
 
   @override
   void onInit() {
@@ -76,16 +78,29 @@ class DetailQueueController extends GetxController {
   }
 
   void rejectQueue() {
-    DialogService.showDialogChoice(
-      description: 'Apakah anda yakin ingin menolak antrian ini?',
-      textNegativeButton: 'Tidak',
-      textPositiveButton: 'Ya',
+    // show dialog to input note
+    DialogService.showDialogInput(
+      title: 'Alasan Menolak Antrian',
+      description: 'Masukkan alasan anda menolak antrian ini.',
+      textNegativeButton: 'Batal',
+      textPositiveButton: 'Kirim',
+      controller: noteController,
       onTapNegativeButton: () => Get.back(),
       onTapPositiveButton: () {
         Get.back();
         rejectQueueChallenge();
       },
     );
+    // DialogService.showDialogChoice(
+    //   description: 'Apakah anda yakin ingin menolak antrian ini?',
+    //   textNegativeButton: 'Tidak',
+    //   textPositiveButton: 'Ya',
+    //   onTapNegativeButton: () => Get.back(),
+    //   onTapPositiveButton: () {
+    //     Get.back();
+    //     rejectQueueChallenge();
+    //   },
+    // );
   }
 
   Future<void> rejectQueueChallenge() async {
@@ -94,6 +109,7 @@ class DetailQueueController extends GetxController {
     var res = await _repository.approveOrRejectReservation(
       reservationId: item?.id ?? 0,
       status: 3,
+      rejectReason: noteController.text,
     );
 
     DialogService.closeLoading();

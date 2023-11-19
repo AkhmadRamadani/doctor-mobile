@@ -1,4 +1,3 @@
-import 'package:doctor_mobile/core/constants/color_const.dart';
 import 'package:doctor_mobile/core/extensions/date_extensions.dart';
 import 'package:doctor_mobile/modules/patients/features/medical_report/models/response/get_my_medical_record_response.dart';
 import 'package:flutter/material.dart';
@@ -103,26 +102,6 @@ class MedicalReportCardWidget extends StatelessWidget {
               fontWeight: FontWeight.w400,
             ),
           ),
-          Row(
-            children: [
-              const Spacer(),
-              Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: ColorConst.primary900.withOpacity(0.2),
-                  borderRadius: BorderRadius.circular(4.r),
-                ),
-                child: const Text(
-                  'Buat Janji Ulang',
-                  style: TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w700,
-                    color: ColorConst.primary900,
-                  ),
-                ),
-              )
-            ],
-          )
         ],
       ),
     );

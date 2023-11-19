@@ -48,6 +48,6 @@ class LoginController extends GetxController {
   }
 
   void register() {
-    Get.offNamed('/register');
+    Get.toNamed(AppRoutes.register);
   }
 }

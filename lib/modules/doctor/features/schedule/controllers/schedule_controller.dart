@@ -1,3 +1,4 @@
+import 'package:doctor_mobile/core/extensions/date_extensions.dart';
 import 'package:doctor_mobile/core/state/ui_state_model/ui_state_model.dart';
 import 'package:doctor_mobile/modules/doctor/features/schedule/models/responses/get_my_schedule_response.dart';
 import 'package:doctor_mobile/modules/doctor/features/schedule/repositories/schedule_repository.dart';
@@ -16,6 +17,8 @@ class ScheduleController extends GetxController {
   ScrollController scrollController = ScrollController();
 
   ScheduleRepository repository = ScheduleRepository();
+
+  DateTime currentDate = DateTime.now();
 
   void onRefresh({String? value}) async {
     await getMyScheduleChallenge();
@@ -40,6 +43,8 @@ class ScheduleController extends GetxController {
               1
           : 1,
       limit: 10,
+      fromDate:
+          currentDate.extToFormattedString(outputDateFormat: 'yyyy-MM-dd'),
     );
 
     if (isLoadMore) {

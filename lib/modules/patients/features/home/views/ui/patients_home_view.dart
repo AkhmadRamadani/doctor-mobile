@@ -150,7 +150,7 @@ class PatientsHomeView extends StatelessWidget {
                             ),
                             SizedBox(
                               width: 1.sw,
-                              height: 0.21.sh,
+                              height: 0.24.sh,
                               child: ListView.builder(
                                 itemCount: data.length,
                                 scrollDirection: Axis.horizontal,
@@ -177,6 +177,7 @@ class PatientsHomeView extends StatelessWidget {
                                             .currentActiveReservation,
                                         remainingQueue:
                                             data[index].aheadReservation,
+                                        status: data[index].status,
                                       ),
                                     ),
                                   );

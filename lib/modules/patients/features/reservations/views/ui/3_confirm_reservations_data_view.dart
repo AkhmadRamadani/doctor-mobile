@@ -69,13 +69,14 @@ class ConfirmReservationsDataView extends StatelessWidget {
                   Text(
                     controller.doctor?.name ?? "",
                     style: TextStyle(
-                      fontSize: 18.sp,
+                      fontSize: 16.sp,
                       fontWeight: FontWeight.w700,
                       color: Colors.white,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                   SizedBox(
-                    height: 4.h,
+                    height: 8.h,
                   ),
                   Text(
                     controller.doctor?.qualification ?? "",
@@ -277,7 +278,7 @@ class ConfirmReservationsDataView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Waktu",
+                          "Sisa Kuota",
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w600,

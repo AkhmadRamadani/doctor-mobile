@@ -2,6 +2,7 @@ import 'package:doctor_mobile/core/constants/color_const.dart';
 import 'package:doctor_mobile/core/extensions/string_extensions.dart';
 import 'package:doctor_mobile/modules/patients/features/reservations/controllers/2_make_appointment_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
@@ -70,6 +71,7 @@ class MakeAppointmentView extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
                       ),
+                      textAlign: TextAlign.center,
                     ),
                     SizedBox(
                       height: 8.h,
@@ -220,71 +222,134 @@ class MakeAppointmentView extends StatelessWidget {
               SizedBox(
                 height: 16.h,
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      "Tentukan Waktu Kunjungan",
-                      style: TextStyle(
-                        fontSize: 16.sp,
-                        fontWeight: FontWeight.w600,
-                        color: ColorConst.primary900,
+              GetBuilder<MakeAppointmentController>(
+                id: 'quota',
+                builder: (state) {
+                  return Conditional.single(
+                    context: context,
+                    conditionBuilder: (_) => state.schedule != null,
+                    fallbackBuilder: (_) => const SizedBox(),
+                    widgetBuilder: (_) => Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.w),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Sisa Kuota",
+                            style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w600,
+                              color: ColorConst.primary900,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 8.h,
+                          ),
+                          Container(
+                            width: 1.sw,
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 6.h, vertical: 6.h),
+                            decoration: BoxDecoration(
+                              color: ColorConst.primary50,
+                              borderRadius: BorderRadius.circular(8.r),
+                            ),
+                            child: Row(
+                              children: [
+                                Icon(
+                                  Icons.info_outline_rounded,
+                                  color: ColorConst.primary900,
+                                  size: 16.sp,
+                                ),
+                                SizedBox(
+                                  width: 8.w,
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    'Sisa kuota untuk tanggal ${controller.schedule?.scheduleDate ?? ""} adalah ${state.quota}',
+                                    style: TextStyle(
+                                      fontSize: 10.sp,
+                                      fontWeight: FontWeight.w600,
+                                      color: ColorConst.primary900,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
                       ),
                     ),
-                    SizedBox(
-                      height: 8.h,
-                    ),
-                    TextFormField(
-                      controller: controller.timeController,
-                      readOnly: true,
-                      onTap: () {
-                        controller.selectTime(context);
-                      },
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w400,
-                        color: ColorConst.primary900,
-                      ),
-                      decoration: const InputDecoration(
-                        contentPadding: EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 16,
-                        ),
-                        hintText: 'Pilih Waktu Kunjungan',
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(8),
-                          ),
-                          borderSide: BorderSide(
-                            color: ColorConst.primary500,
-                          ),
-                        ),
-                        enabledBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(8),
-                          ),
-                          borderSide: BorderSide(
-                            color: ColorConst.primary500,
-                          ),
-                        ),
-                        suffixIcon: Icon(
-                          Icons.arrow_drop_down_rounded,
-                          color: ColorConst.primary500,
-                        ),
-                        prefixIcon: Icon(
-                          Icons.access_time_outlined,
-                          color: ColorConst.primary500,
-                        ),
-                      ),
-                      textInputAction: TextInputAction.next,
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
+              // SizedBox(
+              //   height: 16.h,
+              // ),
+              // Padding(
+              //   padding: EdgeInsets.symmetric(horizontal: 16.w),
+              //   child: Column(
+              //     crossAxisAlignment: CrossAxisAlignment.start,
+              //     children: [
+              //       Text(
+              //         "Tentukan Waktu Kunjungan",
+              //         style: TextStyle(
+              //           fontSize: 16.sp,
+              //           fontWeight: FontWeight.w600,
+              //           color: ColorConst.primary900,
+              //         ),
+              //       ),
+              //       SizedBox(
+              //         height: 8.h,
+              //       ),
+              //       TextFormField(
+              //         controller: controller.timeController,
+              //         readOnly: true,
+              //         onTap: () {
+              //           controller.selectTime(context);
+              //         },
+              //         style: TextStyle(
+              //           fontSize: 12.sp,
+              //           fontWeight: FontWeight.w400,
+              //           color: ColorConst.primary900,
+              //         ),
+              //         decoration: const InputDecoration(
+              //           contentPadding: EdgeInsets.symmetric(
+              //             horizontal: 16,
+              //             vertical: 16,
+              //           ),
+              //           hintText: 'Pilih Waktu Kunjungan',
+              //           border: OutlineInputBorder(
+              //             borderRadius: BorderRadius.all(
+              //               Radius.circular(8),
+              //             ),
+              //             borderSide: BorderSide(
+              //               color: ColorConst.primary500,
+              //             ),
+              //           ),
+              //           enabledBorder: OutlineInputBorder(
+              //             borderRadius: BorderRadius.all(
+              //               Radius.circular(8),
+              //             ),
+              //             borderSide: BorderSide(
+              //               color: ColorConst.primary500,
+              //             ),
+              //           ),
+              //           suffixIcon: Icon(
+              //             Icons.arrow_drop_down_rounded,
+              //             color: ColorConst.primary500,
+              //           ),
+              //           prefixIcon: Icon(
+              //             Icons.access_time_outlined,
+              //             color: ColorConst.primary500,
+              //           ),
+              //         ),
+              //         textInputAction: TextInputAction.next,
+              //       ),
+              //     ],
+              //   ),
+              // ),
               SizedBox(
-                height: 16.h,
+                height: 32.h,
               ),
               GestureDetector(
                 onTap: () {

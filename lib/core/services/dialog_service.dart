@@ -136,4 +136,45 @@ class DialogService {
       ),
     );
   }
+
+  static void showDialogInput(
+      {required String title,
+      required String description,
+      required String textNegativeButton,
+      required String textPositiveButton,
+      required TextEditingController controller,
+      required void Function() onTapNegativeButton,
+      required Null Function() onTapPositiveButton}) {
+    Get.defaultDialog(
+      title: title,
+      titlePadding: const EdgeInsets.all(16),
+      contentPadding: const EdgeInsets.all(16),
+      content: Column(
+        children: [
+          Text(description),
+          const SizedBox(
+            height: 10,
+          ),
+          TextFormField(
+            controller: controller,
+            decoration: const InputDecoration(
+              border: OutlineInputBorder(),
+            ),
+          ),
+        ],
+      ),
+      cancel: TextButton(
+        onPressed: onTapNegativeButton,
+        child: Text(textNegativeButton),
+      ),
+      confirm: TextButton(
+        onPressed: onTapPositiveButton,
+        child: Text(
+          textPositiveButton,
+        ),
+      ),
+      onConfirm: onTapPositiveButton,
+      onCancel: onTapNegativeButton,
+    );
+  }
 }

@@ -31,7 +31,7 @@ class GeneralEmptyErrorWidget extends StatelessWidget {
     this.customTitleTextStyle,
     this.customHeightContent,
     this.onRefresh,
-    this.customUrlImage = '',
+    this.customUrlImage = AssetConst.drawEmptyWidget,
     this.isCentered = true,
     this.additionalWidgetBellowTextDesc,
   })  : heightImage = 0,

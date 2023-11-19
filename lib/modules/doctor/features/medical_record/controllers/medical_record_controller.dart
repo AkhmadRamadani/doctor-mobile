@@ -67,7 +67,7 @@ class MedicalRecordController extends GetxController {
     if (handlingController.text.isEmpty) {
       Get.snackbar(
         'Perhatian',
-        'Mohon isi penanganan terlebih dahulu',
+        'Mohon isi tindakan terlebih dahulu',
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
@@ -77,7 +77,7 @@ class MedicalRecordController extends GetxController {
     if (physicalExaminationController.text.isEmpty) {
       Get.snackbar(
         'Perhatian',
-        'Mohon isi ujian fisik terlebih dahulu',
+        'Mohon isi pemeriksaan fisik terlebih dahulu',
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );
@@ -97,7 +97,7 @@ class MedicalRecordController extends GetxController {
     if (recommendationController.text.isEmpty) {
       Get.snackbar(
         'Perhatian',
-        'Mohon isi rekomendasi terlebih dahulu',
+        'Mohon isi anjuran terlebih dahulu',
         backgroundColor: Colors.red,
         colorText: Colors.white,
       );

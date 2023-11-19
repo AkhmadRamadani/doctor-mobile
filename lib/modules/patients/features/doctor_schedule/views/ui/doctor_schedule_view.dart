@@ -71,6 +71,7 @@ class DoctorScheduleView extends StatelessWidget {
                       fontWeight: FontWeight.w700,
                       color: Colors.white,
                     ),
+                    textAlign: TextAlign.center,
                   ),
                   SizedBox(
                     height: 4.h,

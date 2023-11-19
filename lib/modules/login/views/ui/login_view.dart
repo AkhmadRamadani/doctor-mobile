@@ -89,22 +89,22 @@ class LoginView extends StatelessWidget {
                     const SizedBox(
                       height: 24,
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        GestureDetector(
-                          onTap: () {},
-                          child: const Text(
-                            'Lupa Password?',
-                            style: TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w400,
-                              color: ColorConst.primary500,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
+                    // Row(
+                    //   mainAxisAlignment: MainAxisAlignment.end,
+                    //   children: [
+                    //     GestureDetector(
+                    //       onTap: () {},
+                    //       child: const Text(
+                    //         'Lupa Password?',
+                    //         style: TextStyle(
+                    //           fontSize: 12,
+                    //           fontWeight: FontWeight.w400,
+                    //           color: ColorConst.primary500,
+                    //         ),
+                    //       ),
+                    //     ),
+                    //   ],
+                    // ),
                     const SizedBox(
                       height: 48,
                     ),

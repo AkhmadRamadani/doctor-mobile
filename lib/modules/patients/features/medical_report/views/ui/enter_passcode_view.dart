@@ -79,8 +79,18 @@ class _PinputViewState extends State<PinputView> {
           if (int.parse(pin) == user?.accessCode) {
             Get.offNamed(PatientsRoutesConst.medicalReport);
           } else {
-            setState(() {
-              showError = true;
+            Get.snackbar(
+              'Gagal',
+              'PIN yang anda masukkan salah',
+              backgroundColor: Colors.redAccent,
+              colorText: Colors.white,
+              duration: const Duration(seconds: 1),
+            );
+            controller.clear();
+
+            // refocus
+            Future.delayed(const Duration(milliseconds: 100), () {
+              FocusScope.of(context).requestFocus(focusNode);
             });
           }
         },
@@ -127,8 +137,10 @@ class _EnterPasscodeViewState extends State<EnterPasscodeView>
   }
 
   Future<void> setUser() async {
-    user = await _globalRepositoryService.getCurrentUser();
-    setState(() {});
+    var newUser = await _globalRepositoryService.getCurrentUser();
+    setState(() {
+      user = newUser;
+    });
   }
 
   @override

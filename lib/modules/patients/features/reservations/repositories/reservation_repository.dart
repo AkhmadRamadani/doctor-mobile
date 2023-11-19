@@ -213,4 +213,19 @@ class ReservationRepository extends GlobalRepositoryService {
       );
     }
   }
+
+  Future<int> getRemainingQuota({
+    required int scheduleId,
+  }) async {
+    try {
+      Response res = await ApiServices.call().get(
+        '${ApiConst.reservationQuota}/$scheduleId',
+      );
+      return res.data['data'] ?? 0;
+    } on DioException catch (_) {
+      return 0;
+    } catch (err) {
+      return 0;
+    }
+  }
 }

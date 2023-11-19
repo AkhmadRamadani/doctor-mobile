@@ -22,6 +22,8 @@ class AssetConst {
       'assets/images/draw_ask_permission_media.png';
   static const String drawAskPermissionCamera =
       'assets/images/draw_ask_permission_camera.png';
+  // draw_empty_widget
+  static const String drawEmptyWidget = 'assets/images/draw_empty_widget.png';
 
   /// ============== Icons ==============
   static const String icDoctorSchedule = 'assets/images/ic_doctor_schedule.png';

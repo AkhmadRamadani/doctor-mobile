@@ -11,11 +11,13 @@ class ScheduleRepository extends GlobalRepositoryService {
   Future<GetMyScheduleResponse> getDoctorSchedules({
     int? page,
     int? limit,
+    String? fromDate,
   }) async {
     try {
       var query = {
         'page': page,
         'limit': limit,
+        'from_date': fromDate,
       };
 
       Response res = await ApiServices.call().get(

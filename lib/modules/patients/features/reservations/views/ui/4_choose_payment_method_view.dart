@@ -44,6 +44,39 @@ class ChoosePaymentMethod extends StatelessWidget {
                     controller.paymentType.value == PaymentTypeEnum.transfer,
                 widgetBuilder: (_) => Column(
                   children: [
+                    Container(
+                      width: 1.sw,
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 4.h, vertical: 4.h),
+                      margin: EdgeInsets.symmetric(horizontal: 16.w),
+                      decoration: BoxDecoration(
+                        color: ColorConst.complementary50,
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.info_outline_rounded,
+                            color: ColorConst.complementary500,
+                            size: 16.sp,
+                          ),
+                          SizedBox(
+                            width: 8.w,
+                          ),
+                          Expanded(
+                            child: Text(
+                              'Harap melakukan pembayaran ke rekening berikut: \n\nBank BCA\nNo. Rekening: 1234567890\nAtas Nama: PT. Sehati\nNominal: Rp. 50.000',
+                              style: TextStyle(
+                                fontSize: 10.sp,
+                                fontWeight: FontWeight.w600,
+                                color: ColorConst.complementary500,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 16),
                     UploadFileWidget(
                       controller: controller.paymentProofTextController,
                       hintText: 'Upload Bukti Pembayaran',

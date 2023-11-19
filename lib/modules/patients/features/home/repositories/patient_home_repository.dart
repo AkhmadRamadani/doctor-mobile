@@ -9,7 +9,7 @@ import 'package:doctor_mobile/modules/patients/features/home/models/responses/ge
 class PatientHomeRepository extends GlobalRepositoryService {
   Future<GetMyReservationsResponse> getMyReservation({
     int? patientId,
-    int status = 0,
+    // int status = 0,
   }) async {
     try {
       User user = await getCurrentUser();
@@ -17,7 +17,7 @@ class PatientHomeRepository extends GlobalRepositoryService {
 
       var query = {
         'patient_id': patientId,
-        'status': status,
+        'status': "0, 1",
       };
 
       Response res = await ApiServices.call().get(

@@ -50,11 +50,13 @@ class PatientQueueRepository extends GlobalRepositoryService {
   Future<ApproveRejectResponse> approveOrRejectReservation({
     required int reservationId,
     required int status,
+    String? rejectReason,
   }) async {
     try {
       FormData formData = FormData.fromMap({
         'reservation_id': reservationId,
         'status': status,
+        'reason': rejectReason,
       });
 
       Response res = await ApiServices.call().post(

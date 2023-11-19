@@ -74,6 +74,16 @@ class DoctorDashboardController extends GetxController {
         message: response.message ??
             'Terjadi kesalahan saat menerima data, silahkan coba lagi.',
       );
+
+      return;
+    }
+
+    if ((response.data ?? []).isEmpty) {
+      scheduleState.value = const UIStateModel<List<ItemDoctorSchedule>>.empty(
+        message: 'Dokter belum mengatur jadwal praktek.',
+      );
+
+      return;
     }
 
     scheduleState.value = UIStateModel<List<ItemDoctorSchedule>>.success(

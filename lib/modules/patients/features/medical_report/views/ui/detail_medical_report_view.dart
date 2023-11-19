@@ -64,74 +64,77 @@ class _DetailMedicalReportViewState extends State<DetailMedicalReportView> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Konsultasi",
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w700,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Konsultasi",
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 4.h,
-                          ),
-                          Text(
-                            data?.employeeName ?? '-',
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w700,
+                            SizedBox(
+                              height: 4.h,
                             ),
-                          ),
-                          SizedBox(
-                            height: 4.h,
-                          ),
-                          Text(
-                            data?.employeeQualification ?? '-',
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w700,
+                            Text(
+                              data?.employeeName ?? '-',
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              height: 4.h,
+                            ),
+                            Text(
+                              data?.employeeQualification ?? '-',
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
-                      const Spacer(),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text(
-                            "Tanggal",
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w700,
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Text(
+                              "Tanggal",
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            height: 4.h,
-                          ),
-                          Text(
-                            (DateTime.tryParse(data?.createdAt ?? '') ??
-                                    DateTime.now())
-                                .toHumanReadableDateString(),
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w700,
+                            SizedBox(
+                              height: 4.h,
                             ),
-                          ),
-                          SizedBox(
-                            height: 4.h,
-                          ),
-                          Text(
-                            (DateTime.tryParse(data?.createdAt ?? '') ??
-                                    DateTime.now())
-                                .toHHMMString(),
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              fontWeight: FontWeight.w700,
+                            Text(
+                              (DateTime.tryParse(data?.createdAt ?? '') ??
+                                      DateTime.now())
+                                  .toHumanReadableDateString(),
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w700,
+                              ),
                             ),
-                          ),
-                        ],
+                            SizedBox(
+                              height: 4.h,
+                            ),
+                            Text(
+                              (DateTime.tryParse(data?.createdAt ?? '') ??
+                                      DateTime.now())
+                                  .toHHMMString(),
+                              style: TextStyle(
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),

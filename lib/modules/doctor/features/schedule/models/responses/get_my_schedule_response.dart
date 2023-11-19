@@ -164,6 +164,7 @@ class ItemMySchedule {
   String? scheduleTimeEnd;
   int? qty;
   String? placeName;
+  bool? isExpired;
 
   ItemMySchedule({
     this.id,
@@ -172,6 +173,7 @@ class ItemMySchedule {
     this.scheduleTimeEnd,
     this.qty,
     this.placeName,
+    this.isExpired,
   });
 
   ItemMySchedule copyWith({
@@ -181,6 +183,7 @@ class ItemMySchedule {
     String? scheduleTimeEnd,
     int? qty,
     String? placeName,
+    bool? isExpired,
   }) =>
       ItemMySchedule(
         id: id ?? this.id,
@@ -189,6 +192,7 @@ class ItemMySchedule {
         scheduleTimeEnd: scheduleTimeEnd ?? this.scheduleTimeEnd,
         qty: qty ?? this.qty,
         placeName: placeName ?? this.placeName,
+        isExpired: isExpired ?? this.isExpired,
       );
 
   factory ItemMySchedule.fromJson(Map<String, dynamic> json) => ItemMySchedule(
@@ -198,6 +202,7 @@ class ItemMySchedule {
         scheduleTimeEnd: json["schedule_time_end"],
         qty: json["qty"],
         placeName: json["place_name"],
+        isExpired: json["is_expired"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -207,6 +212,7 @@ class ItemMySchedule {
         "schedule_time_end": scheduleTimeEnd,
         "qty": qty,
         "place_name": placeName,
+        "is_expired": isExpired,
       };
 }
 

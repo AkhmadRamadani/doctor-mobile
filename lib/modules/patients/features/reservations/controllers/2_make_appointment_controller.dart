@@ -27,6 +27,8 @@ class MakeAppointmentController extends GetxController {
   ItemDoctor? doctor;
   User? user;
 
+  int quota = 0;
+
   Rx<UIStateModel<List<ItemDoctorPlaces>>> getDoctorPlaceState =
       const UIStateModel<List<ItemDoctorPlaces>>.idle().obs;
 
@@ -45,6 +47,17 @@ class MakeAppointmentController extends GetxController {
         doctor = args;
       }
     }
+  }
+
+  Future<void> onGetRemainingQuota({
+    required int scheduleId,
+  }) async {
+    var res = await repository.getRemainingQuota(
+      scheduleId: scheduleId,
+    );
+
+    quota = res;
+    update(['quota']);
   }
 
   void getUser() async {
@@ -169,9 +182,9 @@ class MakeAppointmentController extends GetxController {
   void goToConfirmation() {
     if (place == null) {
       Get.snackbar(
-        'Error',
+        'Perhatian',
         'Pilih lokasi terlebih dahulu',
-        backgroundColor: Colors.red,
+        backgroundColor: ColorConst.complementary500,
         colorText: Colors.white,
       );
       return;
@@ -179,19 +192,19 @@ class MakeAppointmentController extends GetxController {
 
     if (schedule == null) {
       Get.snackbar(
-        'Error',
+        'Perhatian',
         'Pilih jadwal terlebih dahulu',
-        backgroundColor: Colors.red,
+        backgroundColor: ColorConst.complementary500,
         colorText: Colors.white,
       );
       return;
     }
 
-    if (timeController.text.isEmpty) {
+    if (quota == 0) {
       Get.snackbar(
-        'Error',
-        'Pilih waktu terlebih dahulu',
-        backgroundColor: Colors.red,
+        'Perhatian',
+        'Kuota habis, silakan pilih jadwal lain.',
+        backgroundColor: ColorConst.complementary500,
         colorText: Colors.white,
       );
       return;
@@ -204,7 +217,7 @@ class MakeAppointmentController extends GetxController {
         'doctor': doctor,
         'place': place,
         'schedule': schedule,
-        'time': timeController.text,
+        'time': quota.toString(),
       },
     );
   }
@@ -425,7 +438,7 @@ class MakeAppointmentController extends GetxController {
                         int quota = item.qty ?? 0;
 
                         return GestureDetector(
-                          onTap: () {
+                          onTap: () async {
                             dateController.text =
                                 scheduleDate.toHumanReadableDateString();
 
@@ -450,6 +463,10 @@ class MakeAppointmentController extends GetxController {
                             }
 
                             schedule = item;
+
+                            await onGetRemainingQuota(
+                              scheduleId: item.id ?? 0,
+                            );
 
                             Get.back();
                           },

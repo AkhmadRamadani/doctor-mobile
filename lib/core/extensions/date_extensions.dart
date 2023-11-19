@@ -2,28 +2,30 @@
 import 'package:intl/intl.dart';
 
 extension DateExtension on DateTime {
+  String get locale => 'id_ID';
+
   String toDateString() {
-    return DateFormat('yyyy-MM-dd').format(this);
+    return DateFormat('yyyy-MM-dd', locale).format(this);
   }
 
   String toTimeString() {
-    return DateFormat('HH:mm:ss').format(this);
+    return DateFormat('HH:mm:ss', locale).format(this);
   }
 
   String toDateTimeString() {
-    return DateFormat('yyyy-MM-dd HH:mm:ss').format(this);
+    return DateFormat('yyyy-MM-dd HH:mm:ss', locale).format(this);
   }
 
   String toHumanReadableDateString() {
-    return DateFormat('EEEE, dd MMMM yyyy').format(this);
+    return DateFormat('EEEE, dd MMMM yyyy', locale).format(this);
   }
 
   String toHHMMString() {
-    return DateFormat('HH:mm').format(this);
+    return DateFormat('HH:mm', locale).format(this);
   }
 
   String extToFormattedString({String outputDateFormat = 'yyyy-MM-dd'}) {
-    return DateFormat(outputDateFormat).format(this);
+    return DateFormat(outputDateFormat, locale).format(this);
   }
 
   int getAge() {

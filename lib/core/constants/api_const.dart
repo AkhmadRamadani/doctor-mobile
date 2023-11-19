@@ -19,6 +19,7 @@ class ApiConst {
   static const String reservationTodayTotal = "reservation/today_total";
   static const String reservationBook = "reservation/book";
   static const String reservationDetail = "reservation/detail/";
+  static const String reservationQuota = "reservation/quota/";
 
   /// Get my reservation
   /// params: patient_id

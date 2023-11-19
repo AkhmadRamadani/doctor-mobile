@@ -34,8 +34,8 @@ class InputMedicalRecordView extends StatelessWidget {
               ),
               CustomInputTextWidget(
                 controller: controller.handlingController,
-                title: 'Penanganan',
-                hintText: 'Penanganan',
+                title: 'Tindakan',
+                hintText: 'Tindakan',
                 margin: EdgeInsets.only(
                   bottom: 16.w,
                 ),
@@ -43,8 +43,8 @@ class InputMedicalRecordView extends StatelessWidget {
               ),
               CustomInputTextWidget(
                 controller: controller.physicalExaminationController,
-                title: 'Ujian Fisik',
-                hintText: 'Ujian Fisik',
+                title: 'Pemeriksaan Fisik',
+                hintText: 'Pemeriksaan Fisik',
                 margin: EdgeInsets.only(
                   bottom: 16.w,
                 ),
@@ -61,8 +61,8 @@ class InputMedicalRecordView extends StatelessWidget {
               ),
               CustomInputTextWidget(
                 controller: controller.recommendationController,
-                title: 'Rekomendasi',
-                hintText: 'Rekomendasi',
+                title: 'Anjuran',
+                hintText: 'Anjuran',
                 margin: EdgeInsets.only(
                   bottom: 16.w,
                 ),

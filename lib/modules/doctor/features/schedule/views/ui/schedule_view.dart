@@ -126,57 +126,74 @@ class _ScheduleCardWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: Row(
+      child: Stack(
         children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: ColorConst.primary100,
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: const Icon(
-              Icons.schedule_rounded,
-              color: ColorConst.primary900,
-            ),
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  item?.placeName ?? '-',
-                  style: Theme.of(context).textTheme.titleMedium,
+          Row(
+            children: [
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: ColorConst.primary100,
+                  borderRadius: BorderRadius.circular(20),
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  (DateTime.tryParse(item?.scheduleDate ?? "") ??
-                          DateTime.now())
-                      .toHumanReadableDateString(),
-                  style: Theme.of(context).textTheme.bodySmall,
+                child: const Icon(
+                  Icons.schedule_rounded,
+                  color: ColorConst.primary900,
                 ),
-                const SizedBox(height: 4),
-                Text(
-                  "${(DateTime.tryParse("${item?.scheduleDate ?? ""} ${item?.scheduleTime ?? ""}") ?? DateTime.now()).toHHMMString()} - ${(DateTime.tryParse("${item?.scheduleDate ?? ""} ${item?.scheduleTimeEnd ?? ""}") ?? DateTime.now()).toHHMMString()}",
-                  style: Theme.of(context).textTheme.bodySmall,
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item?.placeName ?? '-',
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      (DateTime.tryParse(item?.scheduleDate ?? "") ??
+                              DateTime.now())
+                          .toHumanReadableDateString(),
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      "${(DateTime.tryParse("${item?.scheduleDate ?? ""} ${item?.scheduleTime ?? ""}") ?? DateTime.now()).toHHMMString()} - ${(DateTime.tryParse("${item?.scheduleDate ?? ""} ${item?.scheduleTimeEnd ?? ""}") ?? DateTime.now()).toHHMMString()}",
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(width: 16),
+              Container(
+                width: 40,
+                height: 40,
+                decoration: BoxDecoration(
+                  color: ColorConst.primary100,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Icon(
+                  Icons.edit,
+                  color: ColorConst.primary900,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: 16),
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              color: ColorConst.primary100,
-              borderRadius: BorderRadius.circular(20),
+          if (item?.isExpired ?? false)
+            Positioned(
+              top: 0,
+              right: 0,
+              child: Container(
+                width: 1.sw,
+                height: 1.sh,
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(0.7),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+              ),
             ),
-            child: const Icon(
-              Icons.edit,
-              color: ColorConst.primary900,
-            ),
-          ),
         ],
       ),
     );

@@ -2,6 +2,7 @@ import 'package:doctor_mobile/core/constants/color_const.dart';
 import 'package:doctor_mobile/core/extensions/date_extensions.dart';
 import 'package:doctor_mobile/core/routes/app_routes.dart';
 import 'package:doctor_mobile/core/widget/custom_shimmer_widget.dart';
+import 'package:doctor_mobile/core/widget/general_empty_error_widget.dart';
 import 'package:doctor_mobile/modules/doctor/constants/doctor_routes_const.dart';
 import 'package:doctor_mobile/modules/doctor/features/dashboard/controllers/doctor_dashboard_controller.dart';
 import 'package:flutter/material.dart';
@@ -40,13 +41,14 @@ class DoctorHomeView extends StatelessWidget {
               controller: controller.refreshController,
               onRefresh: () => controller.onRefresh(),
               child: SingleChildScrollView(
-                padding: EdgeInsets.symmetric(horizontal: 16.w),
+                // padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: SafeArea(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(top: 16.h),
+                        padding:
+                            EdgeInsets.only(top: 16.h, left: 16.w, right: 16.w),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -60,6 +62,8 @@ class DoctorHomeView extends StatelessWidget {
                                         fontWeight: FontWeight.w600,
                                         color: Colors.white,
                                       ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   ) ??
                                   SizedBox(
@@ -105,24 +109,78 @@ class DoctorHomeView extends StatelessWidget {
                       SizedBox(
                         height: 24.h,
                       ),
-                      Text(
-                        controller.selectedDate.toHumanReadableDateString(),
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
-                          color: Colors.white,
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: Text(
+                          controller.selectedDate.toHumanReadableDateString(),
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                          ),
                         ),
                       ),
                       SizedBox(
                         height: 12.h,
                       ),
-                      Row(
-                        children: [
-                          Obx(
-                            () =>
-                                controller.totalReservationsState.value
-                                    .whenOrNull(
-                                  success: (data) => Expanded(
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 16.w),
+                        child: Row(
+                          children: [
+                            Obx(
+                              () =>
+                                  controller.totalReservationsState.value
+                                      .whenOrNull(
+                                    success: (data) => Expanded(
+                                      child: Container(
+                                        width: 1.sw,
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 8.w,
+                                          vertical: 8.w,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'Total Antrian',
+                                              style: TextStyle(
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w400,
+                                                color: ColorConst.primary900,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 8.h,
+                                            ),
+                                            Text(
+                                              '${data.totalAll ?? 0}',
+                                              style: TextStyle(
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w600,
+                                                color: ColorConst.primary900,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    loading: () => Expanded(
+                                      child: CustomShimmerWidget
+                                          .buildShimmerWidget(
+                                        height: 62,
+                                        radius: 8,
+                                        baseColor: Colors.white,
+                                        highlightColor: Colors.grey,
+                                      ),
+                                    ),
+                                  ) ??
+                                  Expanded(
                                     child: Container(
                                       width: 1.sw,
                                       padding: EdgeInsets.symmetric(
@@ -138,7 +196,7 @@ class DoctorHomeView extends StatelessWidget {
                                             MainAxisAlignment.center,
                                         children: [
                                           Text(
-                                            'Total Antrian',
+                                            'Pasien Hari Ini',
                                             style: TextStyle(
                                               fontSize: 10.sp,
                                               fontWeight: FontWeight.w400,
@@ -149,7 +207,7 @@ class DoctorHomeView extends StatelessWidget {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            '${data.totalAll ?? 0}',
+                                            '0',
                                             style: TextStyle(
                                               fontSize: 14.sp,
                                               fontWeight: FontWeight.w600,
@@ -160,63 +218,64 @@ class DoctorHomeView extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  loading: () => Expanded(
-                                    child:
-                                        CustomShimmerWidget.buildShimmerWidget(
-                                      height: 62,
-                                      radius: 8,
-                                      baseColor: Colors.white,
-                                      highlightColor: Colors.grey,
-                                    ),
-                                  ),
-                                ) ??
-                                Expanded(
-                                  child: Container(
-                                    width: 1.sw,
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 8.w,
-                                      vertical: 8.w,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Pasien Hari Ini',
-                                          style: TextStyle(
-                                            fontSize: 10.sp,
-                                            fontWeight: FontWeight.w400,
-                                            color: ColorConst.primary900,
-                                          ),
+                            ),
+                            SizedBox(
+                              width: 16.w,
+                            ),
+                            Obx(
+                              () =>
+                                  controller.totalReservationsState.value
+                                      .whenOrNull(
+                                    success: (data) => Expanded(
+                                      child: Container(
+                                        width: 1.sw,
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 8.w,
+                                          vertical: 8.w,
                                         ),
-                                        SizedBox(
-                                          height: 8.h,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
                                         ),
-                                        Text(
-                                          '0',
-                                          style: TextStyle(
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w600,
-                                            color: ColorConst.primary900,
-                                          ),
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              'Menunggu Konfirmasi',
+                                              style: TextStyle(
+                                                fontSize: 10.sp,
+                                                fontWeight: FontWeight.w400,
+                                                color: ColorConst.primary900,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              height: 8.h,
+                                            ),
+                                            Text(
+                                              '${data.totalWaiting ?? 0}',
+                                              style: TextStyle(
+                                                fontSize: 14.sp,
+                                                fontWeight: FontWeight.w600,
+                                                color: ColorConst.primary900,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                                ),
-                          ),
-                          SizedBox(
-                            width: 16.w,
-                          ),
-                          Obx(
-                            () =>
-                                controller.totalReservationsState.value
-                                    .whenOrNull(
-                                  success: (data) => Expanded(
+                                    loading: () => Expanded(
+                                      child: CustomShimmerWidget
+                                          .buildShimmerWidget(
+                                        height: 62,
+                                        radius: 8,
+                                        baseColor: Colors.white,
+                                        highlightColor: Colors.grey,
+                                      ),
+                                    ),
+                                  ) ??
+                                  Expanded(
                                     child: Container(
                                       width: 1.sw,
                                       padding: EdgeInsets.symmetric(
@@ -243,7 +302,7 @@ class DoctorHomeView extends StatelessWidget {
                                             height: 8.h,
                                           ),
                                           Text(
-                                            '${data.totalWaiting ?? 0}',
+                                            '0',
                                             style: TextStyle(
                                               fontSize: 14.sp,
                                               fontWeight: FontWeight.w600,
@@ -254,63 +313,16 @@ class DoctorHomeView extends StatelessWidget {
                                       ),
                                     ),
                                   ),
-                                  loading: () => Expanded(
-                                    child:
-                                        CustomShimmerWidget.buildShimmerWidget(
-                                      height: 62,
-                                      radius: 8,
-                                      baseColor: Colors.white,
-                                      highlightColor: Colors.grey,
-                                    ),
-                                  ),
-                                ) ??
-                                Expanded(
-                                  child: Container(
-                                    width: 1.sw,
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: 8.w,
-                                      vertical: 8.w,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                          'Menunggu Konfirmasi',
-                                          style: TextStyle(
-                                            fontSize: 10.sp,
-                                            fontWeight: FontWeight.w400,
-                                            color: ColorConst.primary900,
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          height: 8.h,
-                                        ),
-                                        Text(
-                                          '0',
-                                          style: TextStyle(
-                                            fontSize: 14.sp,
-                                            fontWeight: FontWeight.w600,
-                                            color: ColorConst.primary900,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                          ),
-                        ],
+                            ),
+                          ],
+                        ),
                       ),
                       SizedBox(
                         height: 32.h,
                       ),
                       Container(
                         width: 1.sw,
-                        height: 0.28.sh,
+                        height: 0.32.sh,
                         padding: EdgeInsets.symmetric(
                           horizontal: 8.w,
                           vertical: 8.w,
@@ -365,147 +377,179 @@ class DoctorHomeView extends StatelessWidget {
                         ),
                       ),
                       SizedBox(
-                        height: 32.h,
-                      ),
-                      Text(
-                        "Jadwal Yang Akan Datang",
-                        style: TextStyle(
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w600,
-                          color: ColorConst.primary900,
-                        ),
-                      ),
-                      SizedBox(
                         height: 16.h,
                       ),
-                      Obx(() =>
-                          controller.scheduleState.value.whenOrNull(
-                            success: (data) => Table(
-                              border: TableBorder.all(
+                      Container(
+                        width: 1.sw,
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 16.w,
+                          vertical: 16.h,
+                        ),
+                        color: Colors.white,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Jadwal Yang Akan Datang",
+                              style: TextStyle(
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w600,
                                 color: ColorConst.primary900,
-                                width: 1,
-                                borderRadius: BorderRadius.circular(8),
                               ),
-                              children: [
-                                TableRow(
-                                  children: [
-                                    Container(
-                                      decoration: const BoxDecoration(
-                                        color: ColorConst.primary900,
-                                        borderRadius: BorderRadius.only(
-                                          topLeft: Radius.circular(8),
-                                        ),
+                            ),
+                            SizedBox(
+                              height: 16.h,
+                            ),
+                            Obx(
+                              () =>
+                                  controller.scheduleState.value.whenOrNull(
+                                    empty: (message) => Padding(
+                                      padding: EdgeInsets.only(
+                                        bottom: 16.h,
                                       ),
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 16.w,
-                                        vertical: 8.h,
-                                      ),
-                                      child: Text(
-                                        'Hari',
-                                        style: TextStyle(
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.white,
+                                      child: SizedBox(
+                                        width: 1.sw,
+                                        child: GeneralEmptyErrorWidget(
+                                          descText: message,
                                         ),
                                       ),
                                     ),
-                                    Container(
-                                      decoration: const BoxDecoration(
+                                    success: (data) => Table(
+                                      border: TableBorder.all(
                                         color: ColorConst.primary900,
+                                        width: 1,
+                                        borderRadius: BorderRadius.circular(8),
                                       ),
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 16.w,
-                                        vertical: 8.h,
-                                      ),
-                                      child: Text(
-                                        'Tempat',
-                                        style: TextStyle(
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      decoration: const BoxDecoration(
-                                        color: ColorConst.primary900,
-                                        borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(8),
-                                        ),
-                                      ),
-                                      padding: EdgeInsets.symmetric(
-                                        horizontal: 16.w,
-                                        vertical: 8.h,
-                                      ),
-                                      child: Text(
-                                        'Jadwal',
-                                        maxLines: 1,
-                                        style: TextStyle(
-                                          fontSize: 14.sp,
-                                          fontWeight: FontWeight.w700,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                ...[
-                                  for (int i = 0; i < data.length; i++)
-                                    TableRow(
                                       children: [
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 16.w,
-                                            vertical: 8.h,
-                                          ),
-                                          child: Text(
-                                            (DateTime.tryParse(
-                                                        data[i].scheduleDate ??
-                                                            '') ??
-                                                    DateTime.now())
-                                                .toHumanReadableDateString(),
-                                            style: TextStyle(
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w400,
-                                              color: ColorConst.primary900,
+                                        TableRow(
+                                          children: [
+                                            Container(
+                                              decoration: const BoxDecoration(
+                                                color: ColorConst.primary900,
+                                                borderRadius: BorderRadius.only(
+                                                  topLeft: Radius.circular(8),
+                                                ),
+                                              ),
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 16.w,
+                                                vertical: 8.h,
+                                              ),
+                                              child: Text(
+                                                'Hari',
+                                                style: TextStyle(
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 16.w,
-                                            vertical: 8.h,
-                                          ),
-                                          child: Text(
-                                            data[i].placeName ?? '',
-                                            style: TextStyle(
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w400,
-                                              color: ColorConst.primary900,
+                                            Container(
+                                              decoration: const BoxDecoration(
+                                                color: ColorConst.primary900,
+                                              ),
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 16.w,
+                                                vertical: 8.h,
+                                              ),
+                                              child: Text(
+                                                'Tempat',
+                                                style: TextStyle(
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                        Container(
-                                          padding: EdgeInsets.symmetric(
-                                            horizontal: 16.w,
-                                            vertical: 8.h,
-                                          ),
-                                          child: Text(
-                                            '${data[i].scheduleTime ?? ''} - ${data[i].scheduleTimeEnd ?? ''}',
-                                            style: TextStyle(
-                                              fontSize: 14.sp,
-                                              fontWeight: FontWeight.w400,
-                                              color: ColorConst.primary900,
+                                            Container(
+                                              decoration: const BoxDecoration(
+                                                color: ColorConst.primary900,
+                                                borderRadius: BorderRadius.only(
+                                                  topRight: Radius.circular(8),
+                                                ),
+                                              ),
+                                              padding: EdgeInsets.symmetric(
+                                                horizontal: 16.w,
+                                                vertical: 8.h,
+                                              ),
+                                              child: Text(
+                                                'Jadwal',
+                                                maxLines: 1,
+                                                style: TextStyle(
+                                                  fontSize: 14.sp,
+                                                  fontWeight: FontWeight.w700,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
                                             ),
-                                          ),
+                                          ],
                                         ),
+                                        ...[
+                                          for (int i = 0; i < data.length; i++)
+                                            TableRow(
+                                              children: [
+                                                Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: 16.w,
+                                                    vertical: 8.h,
+                                                  ),
+                                                  child: Text(
+                                                    (DateTime.tryParse(data[i]
+                                                                    .scheduleDate ??
+                                                                '') ??
+                                                            DateTime.now())
+                                                        .toHumanReadableDateString(),
+                                                    style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color:
+                                                          ColorConst.primary900,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: 16.w,
+                                                    vertical: 8.h,
+                                                  ),
+                                                  child: Text(
+                                                    data[i].placeName ?? '',
+                                                    style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color:
+                                                          ColorConst.primary900,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Container(
+                                                  padding: EdgeInsets.symmetric(
+                                                    horizontal: 16.w,
+                                                    vertical: 8.h,
+                                                  ),
+                                                  child: Text(
+                                                    '${data[i].scheduleTime ?? ''} - ${data[i].scheduleTimeEnd ?? ''}',
+                                                    style: TextStyle(
+                                                      fontSize: 14.sp,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                      color:
+                                                          ColorConst.primary900,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                        ],
                                       ],
                                     ),
-                                ],
-                              ],
+                                  ) ??
+                                  Container(),
                             ),
-                          ) ??
-                          Container()),
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                 ),
