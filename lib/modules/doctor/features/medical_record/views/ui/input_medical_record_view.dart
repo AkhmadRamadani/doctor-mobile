@@ -70,7 +70,7 @@ class InputMedicalRecordView extends StatelessWidget {
               ),
               CustomInputTextWidget(
                 controller: controller.icdController,
-                title: 'ICD',
+                title: 'ICD (Optional)',
                 hintText: 'ICD',
                 margin: EdgeInsets.only(
                   bottom: 16.w,
@@ -92,7 +92,7 @@ class InputMedicalRecordView extends StatelessWidget {
               ),
               CustomInputTextWidget(
                 controller: controller.noteController,
-                title: 'Deskripsi',
+                title: 'Deskripsi (Optional)',
                 hintText: 'Deskripsi',
                 margin: EdgeInsets.only(
                   bottom: 16.w,

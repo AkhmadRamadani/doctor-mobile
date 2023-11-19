@@ -179,6 +179,7 @@ class ItemAllReservations {
   String? phone;
   String? placeName;
   String? paymentName;
+  String? rejectReason;
 
   ItemAllReservations({
     this.id,
@@ -206,6 +207,7 @@ class ItemAllReservations {
     this.phone,
     this.placeName,
     this.paymentName,
+    this.rejectReason,
   });
 
   ItemAllReservations copyWith({
@@ -234,6 +236,7 @@ class ItemAllReservations {
     String? phone,
     String? placeName,
     String? paymentName,
+    String? rejectReason,
   }) =>
       ItemAllReservations(
         id: id ?? this.id,
@@ -261,6 +264,7 @@ class ItemAllReservations {
         phone: phone ?? this.phone,
         placeName: placeName ?? this.placeName,
         paymentName: paymentName ?? this.paymentName,
+        rejectReason: rejectReason ?? this.rejectReason,
       );
 
   factory ItemAllReservations.fromJson(Map<String, dynamic> json) =>
@@ -290,6 +294,7 @@ class ItemAllReservations {
         phone: json["phone"],
         placeName: json["place_name"],
         paymentName: json["payment_name"],
+        rejectReason: json["reject_reason"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -318,6 +323,7 @@ class ItemAllReservations {
         "phone": phone,
         "place_name": placeName,
         "payment_name": paymentName,
+        "reject_reason": rejectReason,
       };
 }
 
