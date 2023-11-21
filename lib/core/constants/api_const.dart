@@ -1,6 +1,6 @@
 class ApiConst {
   ApiConst._();
-  static const String baseUrl = "http://192.168.0.100:8000/api/";
+  static const String baseUrl = "http://192.168.8.7:8000/api/";
 
   static const String login = "auth/login";
   static const String register = "auth/register";
@@ -15,7 +15,6 @@ class ApiConst {
   static const String scheduleUpdate = "doctor/schedule/update";
   static const String doctorAll = "doctor/all";
   static const String doctorPlaces = "doctor/places/";
-
   static const String reservationTodayTotal = "reservation/today_total";
   static const String reservationBook = "reservation/book";
   static const String reservationDetail = "reservation/detail/";
