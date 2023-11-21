@@ -58,7 +58,7 @@ class MetaAllReservations {
   List<Link>? links;
   String? nextPageUrl;
   String? path;
-  int? perPage;
+  dynamic perPage;
   dynamic prevPageUrl;
   int? to;
   int? total;
@@ -89,7 +89,7 @@ class MetaAllReservations {
     List<Link>? links,
     String? nextPageUrl,
     String? path,
-    int? perPage,
+    dynamic perPage,
     dynamic prevPageUrl,
     int? to,
     int? total,

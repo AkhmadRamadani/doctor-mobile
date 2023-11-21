@@ -57,7 +57,7 @@ class MetaAllPatient {
   List<Link>? links;
   dynamic nextPageUrl;
   String? path;
-  int? perPage;
+  dynamic perPage;
   dynamic prevPageUrl;
   int? to;
   int? total;
@@ -88,7 +88,7 @@ class MetaAllPatient {
     List<Link>? links,
     dynamic nextPageUrl,
     String? path,
-    int? perPage,
+    dynamic perPage,
     dynamic prevPageUrl,
     int? to,
     int? total,

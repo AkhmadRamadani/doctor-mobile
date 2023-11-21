@@ -12,7 +12,10 @@ class DashboardController extends GetxController {
   void onInit() {
     super.onInit();
     isDoctor =
-        HiveService().getData(HiveConst.accessBox, HiveConst.accessKey) == 2
+        (HiveService().getData(HiveConst.accessBox, HiveConst.accessKey) == 2 ||
+                HiveService()
+                        .getData(HiveConst.accessBox, HiveConst.accessKey) ==
+                    1)
             ? true.obs
             : false.obs;
   }
