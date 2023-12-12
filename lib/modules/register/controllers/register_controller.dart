@@ -1,6 +1,9 @@
 import 'package:doctor_mobile/core/constants/color_const.dart';
 import 'package:doctor_mobile/core/extensions/date_extensions.dart';
+import 'package:doctor_mobile/core/routes/app_routes.dart';
 import 'package:doctor_mobile/core/services/dialog_service.dart';
+import 'package:doctor_mobile/modules/login/controllers/login_controller.dart';
+import 'package:doctor_mobile/modules/login/repositories/login_repository.dart';
 import 'package:doctor_mobile/modules/register/repositories/register_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -83,29 +86,51 @@ class RegisterController extends GetxController {
     DialogService.closeLoading();
 
     if ((res.statusCode ?? 0) >= 200 && (res.statusCode ?? 0) < 300) {
-      // clear
-      nameController.clear();
-      emailController.clear();
-      passwordController.clear();
-      phoneController.clear();
-      dateOfBirthController.clear();
-      genderController.clear();
-      qualificationController.clear();
-      heightController.clear();
-      weightController.clear();
-      accessCodeController.clear();
-      addressController.clear();
-
-      DialogService.showDialogSuccess(
-        title: 'Berhasil',
-        description: 'Berhasil mendaftar, silahkan login',
-      );
+      loginChallenge();
     } else {
       DialogService.showDialogProblem(
         title: 'Gagal',
         description: res.message ?? 'Terjadi kesalahan saat mendaftar',
       );
     }
+  }
+
+  final LoginRepository _loginRepository = LoginRepository();
+
+  void loginChallenge() async {
+    if (emailController.text.isEmpty || passwordController.text.isEmpty) {
+      Get.snackbar(
+        'Error',
+        'Email dan password tidak boleh kosong',
+        backgroundColor: Colors.red,
+        colorText: Colors.white,
+      );
+      return;
+    }
+
+    DialogService.showLoading();
+
+    var response = await _loginRepository.login(
+      emailController.text,
+      passwordController.text,
+    );
+
+    DialogService.closeLoading();
+
+    if (response.statusCode != 200) {
+      DialogService.showDialogProblem(
+        title: 'Login Gagal',
+        description: response.message ??
+            'Terjadi kesalahan saat login, silahkan coba lagi.',
+        buttonOnTap: () {
+          Get.back();
+        },
+      );
+
+      return;
+    }
+
+    Get.toNamed(AppRoutes.dashboard);
   }
 
   void datePicker(BuildContext context) async {
