@@ -65,7 +65,7 @@ class ChoosePaymentMethod extends StatelessWidget {
                           ),
                           Expanded(
                             child: Text(
-                              'Harap melakukan pembayaran ke rekening berikut: \n\nBank BCA\nNo. Rekening: 1234567890\nAtas Nama: PT. Sehati\nNominal: Rp. 50.000',
+                              'Harap melakukan pembayaran ke rekening berikut: \n\nBank BCA\nNo. Rekening: 1234567890\nAtas Nama: Sutomo Suryanto\nNominal: Rp. 50.000',
                               style: TextStyle(
                                 fontSize: 10.sp,
                                 fontWeight: FontWeight.w600,
