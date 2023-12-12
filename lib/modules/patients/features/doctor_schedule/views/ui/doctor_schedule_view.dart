@@ -65,7 +65,7 @@ class DoctorScheduleView extends StatelessWidget {
                     height: 16.h,
                   ),
                   Text(
-                    'dr. ${controller.selectedDoctor?.name ?? ''}',
+                    ' ${controller.selectedDoctor?.name ?? ''}',
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w700,

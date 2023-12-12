@@ -122,7 +122,7 @@ class MakeAppointmentView extends StatelessWidget {
                           horizontal: 16,
                           vertical: 16,
                         ),
-                        hintText: 'Pilih Rumah Sakit',
+                        hintText: 'Pilih Tempat Praktik',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(8),
