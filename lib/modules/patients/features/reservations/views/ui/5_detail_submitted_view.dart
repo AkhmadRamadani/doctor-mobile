@@ -317,7 +317,13 @@ class DetailSubmittedView extends StatelessWidget {
                             ),
                             Text(
                               data.data?.aheadReservation == null
-                                  ? "Berikutnya giliran Anda, mohon menunggu"
+                                  ? data.data?.nomorUrut ==
+                                          data.data?.currentActiveReservation
+                                      ? "Sekarang giliran anda"
+                                      : data.data?.currentActiveReservation ==
+                                              null
+                                          ? "-"
+                                          : "Berikutnya giliran Anda, mohon menunggu"
                                   : '${data.data?.aheadReservation ?? 0}',
                               style: TextStyle(
                                 fontSize: 12.sp,

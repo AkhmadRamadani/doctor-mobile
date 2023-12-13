@@ -121,7 +121,9 @@ class ItemAntreanWidget extends StatelessWidget {
                           height: 4.h,
                         ),
                         Text(
-                          (activeReservationNumber ?? 0).toString(),
+                          queueNumber == activeReservationNumber
+                              ? 'Giliran Anda'
+                              : (activeReservationNumber ?? 0).toString(),
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontSize: 14.sp,

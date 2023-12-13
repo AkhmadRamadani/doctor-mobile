@@ -150,7 +150,7 @@ class PatientsHomeView extends StatelessWidget {
                             ),
                             SizedBox(
                               width: 1.sw,
-                              height: 0.24.sh,
+                              height: 0.26.sh,
                               child: ListView.builder(
                                 itemCount: data.length,
                                 scrollDirection: Axis.horizontal,
