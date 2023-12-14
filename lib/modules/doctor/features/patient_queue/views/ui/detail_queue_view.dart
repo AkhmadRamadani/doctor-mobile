@@ -136,96 +136,158 @@ class DetailQueueView extends StatelessWidget {
               SizedBox(
                 height: 16.h,
               ),
+              // Conditional.single(
+              //   context: context,
+              //   conditionBuilder: (_) => controller.item?.approve == 0,
+              //   fallbackBuilder: (context) {
+              //     return GestureDetector(
+              //       onTap: () {
+              //         controller.prosesQueue();
+              //       },
+              //       child: Container(
+              //         width: 1.sw,
+              //         height: 48,
+              //         decoration: BoxDecoration(
+              //           color: ColorConst.primary500,
+              //           borderRadius: BorderRadius.circular(24.r),
+              //         ),
+              //         child: const Center(
+              //           child: Text(
+              //             'Proses',
+              //             style: TextStyle(
+              //               fontSize: 16,
+              //               fontWeight: FontWeight.w600,
+              //               color: Colors.white,
+              //             ),
+              //           ),
+              //         ),
+              //       ),
+              //     );
+              //   },
+              //   widgetBuilder: (_) => Conditional.single(
+              //     context: context,
+              //     conditionBuilder: (_) => controller.item?.status == 0,
+              //     widgetBuilder: (_) => Row(
+              //       children: [
+              //         Expanded(
+              //           child: GestureDetector(
+              //             onTap: () {
+              //               controller.approveQueue();
+              //             },
+              //             child: Container(
+              //               width: 1.sw,
+              //               height: 48,
+              //               decoration: BoxDecoration(
+              //                 color: ColorConst.primary500,
+              //                 borderRadius: BorderRadius.circular(24.r),
+              //               ),
+              //               child: const Center(
+              //                 child: Text(
+              //                   'Terima',
+              //                   style: TextStyle(
+              //                     fontSize: 16,
+              //                     fontWeight: FontWeight.w600,
+              //                     color: Colors.white,
+              //                   ),
+              //                 ),
+              //               ),
+              //             ),
+              //           ),
+              //         ),
+              //         const SizedBox(
+              //           width: 16,
+              //         ),
+              //         Expanded(
+              //           child: GestureDetector(
+              //             onTap: () {
+              //               controller.rejectQueue();
+              //             },
+              //             child: Container(
+              //               width: 1.sw,
+              //               height: 48,
+              //               decoration: BoxDecoration(
+              //                 color: Colors.redAccent,
+              //                 borderRadius: BorderRadius.circular(24.r),
+              //               ),
+              //               child: const Center(
+              //                 child: Text(
+              //                   'Tolak',
+              //                   style: TextStyle(
+              //                     fontSize: 16,
+              //                     fontWeight: FontWeight.w600,
+              //                     color: Colors.white,
+              //                   ),
+              //                 ),
+              //               ),
+              //             ),
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //     fallbackBuilder: (_) => Container(),
+              //   ),
+              // ),
               Conditional.single(
                 context: context,
-                conditionBuilder: (_) => controller.item?.approve == 0,
-                fallbackBuilder: (context) {
-                  return GestureDetector(
-                    onTap: () {
-                      controller.prosesQueue();
-                    },
-                    child: Container(
-                      width: 1.sw,
-                      height: 48,
-                      decoration: BoxDecoration(
-                        color: ColorConst.primary500,
-                        borderRadius: BorderRadius.circular(24.r),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          'Proses',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
+                conditionBuilder: (_) => controller.item?.status == 0,
+                widgetBuilder: (_) => Row(
+                  children: [
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          controller.approveQueue();
+                        },
+                        child: Container(
+                          width: 1.sw,
+                          height: 48,
+                          decoration: BoxDecoration(
+                            color: ColorConst.primary500,
+                            borderRadius: BorderRadius.circular(24.r),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'Terima',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  );
-                },
-                widgetBuilder: (_) => Conditional.single(
-                  context: context,
-                  conditionBuilder: (_) => controller.item?.status == 0,
-                  widgetBuilder: (_) => Row(
-                    children: [
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            controller.approveQueue();
-                          },
-                          child: Container(
-                            width: 1.sw,
-                            height: 48,
-                            decoration: BoxDecoration(
-                              color: ColorConst.primary500,
-                              borderRadius: BorderRadius.circular(24.r),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'Terima',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                ),
+                    const SizedBox(
+                      width: 16,
+                    ),
+                    Expanded(
+                      child: GestureDetector(
+                        onTap: () {
+                          controller.rejectQueue();
+                        },
+                        child: Container(
+                          width: 1.sw,
+                          height: 48,
+                          decoration: BoxDecoration(
+                            color: Colors.redAccent,
+                            borderRadius: BorderRadius.circular(24.r),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              'Tolak',
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
                               ),
                             ),
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        width: 16,
-                      ),
-                      Expanded(
-                        child: GestureDetector(
-                          onTap: () {
-                            controller.rejectQueue();
-                          },
-                          child: Container(
-                            width: 1.sw,
-                            height: 48,
-                            decoration: BoxDecoration(
-                              color: Colors.redAccent,
-                              borderRadius: BorderRadius.circular(24.r),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                'Tolak',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  fallbackBuilder: (_) => Container(),
+                    ),
+                  ],
                 ),
+                fallbackBuilder: (_) => Container(),
               ),
               Conditional.single(
                 context: context,

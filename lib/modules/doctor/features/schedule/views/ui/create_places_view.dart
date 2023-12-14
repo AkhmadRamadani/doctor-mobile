@@ -1,27 +1,25 @@
 import 'package:doctor_mobile/core/constants/color_const.dart';
 import 'package:doctor_mobile/core/widget/custom_input_text_widget.dart';
-import 'package:doctor_mobile/modules/doctor/constants/doctor_routes_const.dart';
-import 'package:doctor_mobile/modules/doctor/features/schedule/controllers/create_schedule_controller.dart';
-import 'package:doctor_mobile/modules/patients/features/reservations/models/responses/get_doctor_places_response.dart';
+import 'package:doctor_mobile/modules/doctor/features/schedule/controllers/create_place_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_conditional_rendering/flutter_conditional_rendering.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-class CreateScheduleView extends StatelessWidget {
-  const CreateScheduleView({super.key});
+class CreatePlaceView extends StatelessWidget {
+  const CreatePlaceView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(
-      CreateScheduleController(),
+      CreatePlaceController(),
     );
     return Scaffold(
       appBar: AppBar(
         title: Obx(
           () => controller.isEdit.value
-              ? const Text('Edit Jadwal')
-              : const Text('Tambah Jadwal'),
+              ? const Text('Edit Tempat')
+              : const Text('Tambah Tempat'),
         ),
       ),
       body: SingleChildScrollView(
@@ -30,77 +28,22 @@ class CreateScheduleView extends StatelessWidget {
           child: Column(
             children: [
               CustomInputTextWidget(
-                controller: controller.placeNameTextController,
-                readOnly: true,
-                onTap: () async {
-                  var data = await Get.toNamed(
-                    DoctorRoutesConst.doctorPlaceList,
-                  );
-
-                  if (data != null) {
-                    controller.placeNameTextController.text = data.name ?? '';
-                    controller.selectedPlace = ItemDoctorPlaces(
-                      id: data.id,
-                      name: data.name,
-                    );
-                  }
-                },
+                controller: controller.nameController,
                 title: 'Nama Tempat',
                 hintText: 'Nama Tempat',
                 margin: EdgeInsets.only(
                   bottom: 16.w,
                 ),
-                suffixIcon: Icons.arrow_drop_down,
                 prefixIcon: Icons.location_on_outlined,
               ),
               CustomInputTextWidget(
-                controller: controller.dateTextController,
-                readOnly: true,
-                onTap: () {
-                  controller.selectDate(context);
-                },
-                title: 'Tanggal',
-                hintText: 'Tanggal',
+                controller: controller.addressController,
+                title: 'Alamat',
+                hintText: 'Alamat',
                 margin: EdgeInsets.only(
                   bottom: 16.w,
                 ),
                 prefixIcon: Icons.calendar_today_outlined,
-              ),
-              CustomInputTextWidget(
-                controller: controller.startTimeTextController,
-                readOnly: true,
-                onTap: () {
-                  controller.selectTimw(context, true);
-                },
-                title: 'Jam Mulai',
-                hintText: 'Jam Mulai',
-                margin: EdgeInsets.only(
-                  bottom: 16.w,
-                ),
-                prefixIcon: Icons.access_time_outlined,
-              ),
-              CustomInputTextWidget(
-                controller: controller.endTimeTextController,
-                readOnly: true,
-                onTap: () {
-                  controller.selectTimw(context, false);
-                },
-                title: 'Jam Selesai',
-                hintText: 'Jam Selesai',
-                margin: EdgeInsets.only(
-                  bottom: 16.w,
-                ),
-                prefixIcon: Icons.access_time_outlined,
-              ),
-              CustomInputTextWidget(
-                controller: controller.quotaTextController,
-                keyboardType: TextInputType.number,
-                title: 'Kuota',
-                hintText: 'Kuota',
-                margin: EdgeInsets.only(
-                  bottom: 16.w,
-                ),
-                prefixIcon: Icons.people_alt_outlined,
               ),
               SizedBox(
                 height: 16.w,
@@ -110,7 +53,7 @@ class CreateScheduleView extends StatelessWidget {
                 conditionBuilder: (_) => controller.isEdit.value,
                 widgetBuilder: (_) => GestureDetector(
                   onTap: () {
-                    controller.deleteSchedule();
+                    controller.deletePlace();
                   },
                   child: Container(
                     width: 1.sw,
@@ -138,7 +81,7 @@ class CreateScheduleView extends StatelessWidget {
               ),
               GestureDetector(
                 onTap: () {
-                  controller.createSchedule();
+                  controller.createPlace();
                 },
                 child: Container(
                   width: 1.sw,

@@ -138,40 +138,40 @@ class ItemAntreanWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Sisa Antrian',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black,
-                          ),
-                        ),
-                        SizedBox(
-                          height: 4.h,
-                        ),
-                        Text(
-                          remainingQueue == null
-                              ? 'Selanjutnya Anda'
-                              : remainingQueue == 0
-                                  ? 'Sekarang'
-                                  : remainingQueue == 1
-                                      ? '1 Antrian'
-                                      : '$remainingQueue Antrian',
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w700,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  // Expanded(
+                  //   child: Column(
+                  //     crossAxisAlignment: CrossAxisAlignment.start,
+                  //     children: [
+                  //       Text(
+                  //         'Sisa Antrian',
+                  //         textAlign: TextAlign.left,
+                  //         style: TextStyle(
+                  //           fontSize: 12.sp,
+                  //           fontWeight: FontWeight.w400,
+                  //           color: Colors.black,
+                  //         ),
+                  //       ),
+                  //       SizedBox(
+                  //         height: 4.h,
+                  //       ),
+                  //       Text(
+                  //         remainingQueue == null
+                  //             ? 'Selanjutnya Anda'
+                  //             : remainingQueue == 0
+                  //                 ? 'Sekarang'
+                  //                 : remainingQueue == 1
+                  //                     ? '1 Antrian'
+                  //                     : '$remainingQueue Antrian',
+                  //         textAlign: TextAlign.left,
+                  //         style: TextStyle(
+                  //           fontSize: 14.sp,
+                  //           fontWeight: FontWeight.w700,
+                  //           color: Colors.black,
+                  //         ),
+                  //       ),
+                  //     ],
+                  //   ),
+                  // ),
                 ],
               )
             ],

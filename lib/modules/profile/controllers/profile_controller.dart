@@ -50,8 +50,8 @@ class ProfileController extends GetxController {
       name: response.data?.name ?? '',
       email: response.data?.email ?? '',
       phone: response.data?.phone ?? '',
-      birthDate:
-          DateTime.tryParse(response.data?.birthDate ?? '') ?? DateTime(2000),
+      birthDate: DateTime.parse(response.data?.birthDate ?? '')
+          .add(const Duration(hours: 7)),
       gender: response.data?.gender ?? '',
       address: response.data?.address ?? '',
     );
@@ -91,7 +91,7 @@ class ProfileController extends GetxController {
       email: emailTextController.text,
       phone: phoneTextController.text,
       address: addressTextController.text,
-      birthDate: selectedBirthDate.toString(),
+      birthDate: selectedBirthDate?.toIso8601String(),
       gender: genderTextController.text,
     );
 

@@ -305,34 +305,34 @@ class DetailSubmittedView extends StatelessWidget {
                             SizedBox(
                               height: 8.h,
                             ),
-                            Text(
-                              "Jumlah Antrian Sisa",
-                              style: TextStyle(
-                                fontSize: 10.sp,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 4.h,
-                            ),
-                            Text(
-                              data.data?.aheadReservation == null
-                                  ? data.data?.nomorUrut ==
-                                          data.data?.currentActiveReservation
-                                      ? "Sekarang giliran anda"
-                                      : data.data?.currentActiveReservation ==
-                                              null
-                                          ? "-"
-                                          : "Berikutnya giliran Anda, mohon menunggu"
-                                  : '${data.data?.aheadReservation ?? 0}',
-                              style: TextStyle(
-                                fontSize: 12.sp,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 8.h,
-                            ),
+                            // Text(
+                            //   "Jumlah Antrian Sisa",
+                            //   style: TextStyle(
+                            //     fontSize: 10.sp,
+                            //     color: Colors.grey,
+                            //   ),
+                            // ),
+                            // SizedBox(
+                            //   height: 4.h,
+                            // ),
+                            // Text(
+                            //   data.data?.aheadReservation == null
+                            //       ? data.data?.nomorUrut ==
+                            //               data.data?.currentActiveReservation
+                            //           ? "Sekarang giliran anda"
+                            //           : data.data?.currentActiveReservation ==
+                            //                   null
+                            //               ? "-"
+                            //               : "Berikutnya giliran Anda, mohon menunggu"
+                            //       : '${data.data?.aheadReservation ?? 0}',
+                            //   style: TextStyle(
+                            //     fontSize: 12.sp,
+                            //     fontWeight: FontWeight.w700,
+                            //   ),
+                            // ),
+                            // SizedBox(
+                            //   height: 8.h,
+                            // ),
                             Text(
                               "Kode Reservasi",
                               style: TextStyle(

@@ -44,7 +44,7 @@ class LoginController extends GetxController {
       return;
     }
 
-    Get.toNamed(AppRoutes.dashboard);
+    Get.offAllNamed(AppRoutes.dashboard);
   }
 
   void register() {

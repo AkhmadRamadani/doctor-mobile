@@ -39,6 +39,7 @@ class PatientQueueControllerWaiting extends PatientQueueController {
           : 1,
       limit: 10,
       status: 0,
+      approve: 0,
     );
 
     if (isLoadMore) {

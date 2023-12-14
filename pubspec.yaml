@@ -33,6 +33,7 @@ dependencies:
   path: ^1.8.3
   pinput: ^3.0.1
   path_provider: ^2.1.1
+  flutter_expandable_fab: ^2.0.0
 
 dev_dependencies:
   flutter_test:

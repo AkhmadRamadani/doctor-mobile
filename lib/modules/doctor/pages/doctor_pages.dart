@@ -6,7 +6,9 @@ import 'package:doctor_mobile/modules/doctor/features/patient_list/views/ui/deta
 import 'package:doctor_mobile/modules/doctor/features/patient_list/views/ui/patient_list_view.dart';
 import 'package:doctor_mobile/modules/doctor/features/patient_queue/views/ui/detail_queue_view.dart';
 import 'package:doctor_mobile/modules/doctor/features/patient_queue/views/ui/patient_queue_view.dart';
+import 'package:doctor_mobile/modules/doctor/features/schedule/views/ui/create_places_view.dart';
 import 'package:doctor_mobile/modules/doctor/features/schedule/views/ui/create_schedule_view.dart';
+import 'package:doctor_mobile/modules/doctor/features/schedule/views/ui/places_view.dart';
 import 'package:doctor_mobile/modules/doctor/features/schedule/views/ui/schedule_view.dart';
 import 'package:get/get.dart';
 
@@ -49,6 +51,14 @@ class DoctorPages {
         GetPage(
           name: DoctorRoutesConst.doctorScheduleCreate,
           page: () => const CreateScheduleView(),
+        ),
+        GetPage(
+          name: DoctorRoutesConst.doctorPlaceList,
+          page: () => const SelectPlaceView(),
+        ),
+        GetPage(
+          name: DoctorRoutesConst.doctorPlaceCreate,
+          page: () => const CreatePlaceView(),
         ),
       ];
 }

@@ -4,73 +4,73 @@ import 'package:doctor_mobile/core/helpers/default_response_helper.dart';
 import 'package:doctor_mobile/core/helpers/dio_error_helper.dart';
 import 'package:doctor_mobile/core/services/global_repository_service.dart';
 import 'package:doctor_mobile/core/services/network_service.dart';
-import 'package:doctor_mobile/modules/doctor/features/schedule/models/responses/get_my_schedule_response.dart';
+import 'package:doctor_mobile/modules/doctor/features/schedule/models/responses/get_my_places_response.dart';
 import 'package:doctor_mobile/modules/login/models/response/login_response.dart';
 
-class ScheduleRepository extends GlobalRepositoryService {
-  Future<GetMyScheduleResponse> getDoctorSchedules({
+class PlaceRepository extends GlobalRepositoryService {
+  Future<GetMyPlacesResponse> getMyPlaces({
     int? page,
     int? limit,
-    String? fromDate,
+    String? search,
   }) async {
     try {
+      User user = await getCurrentUser();
+
       var query = {
         'page': page,
         'limit': limit,
-        'from_date': fromDate,
+        'search': search,
+        'employee_id': user.employeeId,
       };
 
       Response res = await ApiServices.call().get(
-        ApiConst.doctorMySchedule,
+        ApiConst.placesMy,
         queryParameters: query,
       );
 
-      return GetMyScheduleResponse.fromJson(res.data);
+      return GetMyPlacesResponse.fromJson(res.data);
     } on DioException catch (dioError) {
       if (dioError.response == null || dioError.response?.data == null) {
-        return GetMyScheduleResponse(
+        return GetMyPlacesResponse(
           statusCode: dioError.response?.statusCode ?? 400,
           message: DioErrorHelper.fromDioError(dioError),
         );
       } else {
         try {
-          return GetMyScheduleResponse.fromJson(dioError.response?.data);
+          return GetMyPlacesResponse.fromJson(dioError.response?.data);
         } catch (e) {
-          return GetMyScheduleResponse(
+          return GetMyPlacesResponse(
             statusCode: dioError.response?.statusCode ?? 400,
             message: DioErrorHelper.fromDioError(dioError),
           );
         }
       }
     } catch (err) {
-      return GetMyScheduleResponse(
+      return GetMyPlacesResponse(
         message: 'Terjadi kesalahan saat menerima data, silahkan coba lagi.',
       );
     }
   }
 
-  Future<DefaultResponseHelper> createSchedule({
-    required int placeId,
-    required String date,
-    required String startTime,
-    required String endTime,
-    required int qty,
+  // create place
+  // param is name and address
+  Future<DefaultResponseHelper> createPlace({
+    required String name,
+    required String address,
   }) async {
     try {
-      User? user = await getCurrentUser();
+      User user = await getCurrentUser();
 
-      FormData formData = FormData.fromMap({
+      var body = {
+        'name': name,
+        'address': address,
         'employee_id': user.employeeId,
-        'place_id': placeId,
-        'schedule_date': date,
-        'schedule_time': startTime,
-        'schedule_time_end': endTime,
-        'qty': qty,
-      });
+        'reservationable': 1,
+      };
 
       Response res = await ApiServices.call().post(
-        ApiConst.scheduleCreate,
-        data: formData,
+        ApiConst.placesCreate,
+        data: body,
       );
 
       return DefaultResponseHelper.fromJson(res.data);
@@ -97,30 +97,25 @@ class ScheduleRepository extends GlobalRepositoryService {
     }
   }
 
-  Future<DefaultResponseHelper> updateSchedule({
+  Future<DefaultResponseHelper> updatePlace({
     required int id,
-    required int placeId,
-    required String date,
-    required String startTime,
-    required String endTime,
-    required int qty,
+    required String name,
+    required String address,
   }) async {
     try {
-      User? user = await getCurrentUser();
+      User user = await getCurrentUser();
 
-      FormData formData = FormData.fromMap({
+      var body = {
         'id': id,
+        'name': name,
+        'address': address,
         'employee_id': user.employeeId,
-        'place_id': placeId,
-        'schedule_date': date,
-        'schedule_time': startTime,
-        'schedule_time_end': endTime,
-        'qty': qty,
-      });
+        'reservationable': 1,
+      };
 
       Response res = await ApiServices.call().post(
-        ApiConst.scheduleUpdate,
-        data: formData,
+        ApiConst.placesUpdate,
+        data: body,
       );
 
       return DefaultResponseHelper.fromJson(res.data);
@@ -147,13 +142,16 @@ class ScheduleRepository extends GlobalRepositoryService {
     }
   }
 
-  Future<DefaultResponseHelper> deleteSchedule({required int id}) async {
+  Future<DefaultResponseHelper> deletePlace({
+    required int id,
+  }) async {
     try {
       var query = {
         'id': id,
       };
+
       Response res = await ApiServices.call().post(
-        ApiConst.scheduleDelete,
+        ApiConst.placesDelete,
         queryParameters: query,
       );
 

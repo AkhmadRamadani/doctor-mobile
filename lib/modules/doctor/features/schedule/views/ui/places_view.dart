@@ -1,22 +1,37 @@
+import 'package:doctor_mobile/core/constants/color_const.dart';
 import 'package:doctor_mobile/core/widget/custom_shimmer_widget.dart';
 import 'package:doctor_mobile/core/widget/general_empty_error_widget.dart';
-import 'package:doctor_mobile/modules/doctor/features/medical_record/controllers/select_icds_controller.dart';
+import 'package:doctor_mobile/modules/doctor/constants/doctor_routes_const.dart';
+import 'package:doctor_mobile/modules/doctor/features/schedule/controllers/places_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh_flutter3/pull_to_refresh_flutter3.dart';
 
-class SelectICDSView extends StatelessWidget {
-  const SelectICDSView({super.key});
+class SelectPlaceView extends StatelessWidget {
+  const SelectPlaceView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final SelectIcdsController controller = Get.put(
-      SelectIcdsController(),
+    final PlaceController controller = Get.put(
+      PlaceController(),
     );
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Pilih ICD'),
+        title: const Text('Pilih Tempat'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          await Get.toNamed(
+            DoctorRoutesConst.doctorPlaceCreate,
+          );
+          controller.getMyPlacesChallenge();
+        },
+        backgroundColor: ColorConst.primary900,
+        child: const Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
       ),
       body: Column(
         children: [
@@ -30,14 +45,14 @@ class SelectICDSView extends StatelessWidget {
             child: TextField(
               controller: controller.searchController,
               decoration: InputDecoration(
-                hintText: 'Cari ICD',
+                hintText: 'Cari Tempat',
                 prefixIcon: const Icon(
                   Icons.search,
                 ),
                 suffixIcon: GestureDetector(
                   onTap: () {
                     controller.searchController.clear();
-                    controller.getAllIcdsChallenge();
+                    controller.getMyPlacesChallenge();
                   },
                   child: const Icon(
                     Icons.clear,
@@ -48,7 +63,7 @@ class SelectICDSView extends StatelessWidget {
                 ),
               ),
               onSubmitted: (value) {
-                controller.getAllIcdsChallenge(
+                controller.getMyPlacesChallenge(
                   search: value,
                 );
               },
@@ -67,7 +82,7 @@ class SelectICDSView extends StatelessWidget {
                 value: controller.searchController.text,
               ),
               onLoading: () async {
-                controller.getAllIcdsChallenge(
+                controller.getMyPlacesChallenge(
                   isLoadMore: true,
                   search: controller.searchController.text,
                 );
@@ -88,13 +103,36 @@ class SelectICDSView extends StatelessWidget {
                           },
                           child: ListTile(
                             title: Text(
-                              data.data?[index].nameId ?? '',
+                              data.data?[index].name ?? '',
                             ),
                             subtitle: Text(
-                              data.data?[index].code ?? '',
+                              data.data?[index].address ?? '',
                             ),
-                            trailing: const Icon(
-                              Icons.add,
+                            trailing: SizedBox(
+                              width: 70.w,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  GestureDetector(
+                                    onTap: () async {
+                                      await Get.toNamed(
+                                        DoctorRoutesConst.doctorPlaceCreate,
+                                        arguments: data.data?[index],
+                                      );
+                                      controller.getMyPlacesChallenge();
+                                    },
+                                    child: Icon(
+                                      Icons.edit,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    width: 16,
+                                  ),
+                                  Icon(
+                                    Icons.add,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         );

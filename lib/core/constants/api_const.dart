@@ -1,6 +1,6 @@
 class ApiConst {
   ApiConst._();
-  static const String baseUrl = "http://192.168.1.3:8000/api/";
+  static const String baseUrl = "http://192.168.0.112:8000/api/";
 
   static const String login = "auth/login";
   static const String register = "auth/register";
@@ -13,6 +13,7 @@ class ApiConst {
   static const String doctorMySchedule = "doctor/my_schedule";
   static const String scheduleCreate = "doctor/schedule/create";
   static const String scheduleUpdate = "doctor/schedule/update";
+  static const String scheduleDelete = "doctor/schedule/delete";
   static const String doctorAll = "doctor/all";
   static const String doctorPlaces = "doctor/places/";
   static const String reservationTodayTotal = "reservation/today_total";
@@ -46,4 +47,10 @@ class ApiConst {
   // /notification/all
   static const String notificationAll = "notification/all";
   static const String notificationRead = "notification/read";
+
+  // places
+  static const String placesMy = "place/my";
+  static const String placesCreate = "place/create";
+  static const String placesUpdate = "place/update";
+  static const String placesDelete = "place/delete";
 }

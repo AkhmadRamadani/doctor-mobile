@@ -11,4 +11,7 @@ class DoctorRoutesConst {
   static const String doctorScheduleList = '/doctor-schedule-list';
   static const String doctorScheduleDetail = '/doctor-schedule-detail';
   static const String doctorScheduleCreate = '/doctor-schedule-create';
+  static const String doctorPlaceList = '/doctor-place-list';
+  static const String doctorPlaceCreate = '/doctor-place-create';
+  static const String doctorPlaceDetail = '/doctor-place-detail';
 }

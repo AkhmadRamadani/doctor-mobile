@@ -444,4 +444,47 @@ class CreateScheduleController extends GetxController {
       ),
     );
   }
+
+  void deleteSchedule() {
+    DialogService.showDialogChoice(
+      title: 'Konfirmasi',
+      description: 'Apakah anda yakin ingin menghapus jadwal?',
+      onTapPositiveButton: () async {
+        Get.back();
+        await deleteScheduleChallenge();
+      },
+      onTapNegativeButton: () {
+        Get.back();
+      },
+    );
+  }
+
+  Future<void> deleteScheduleChallenge() async {
+    DialogService.showLoading();
+
+    var res = await repository.deleteSchedule(
+      id: itemMySchedule?.id ?? 0,
+    );
+
+    DialogService.closeLoading();
+
+    if (res.statusCode != 200) {
+      DialogService.showDialogProblem(
+        title: 'Gagal Menghapus Jadwal',
+        description: res.message ?? '',
+      );
+
+      return;
+    }
+
+    if (res.statusCode == 200) {
+      DialogService.showDialogSuccess(
+        title: 'Berhasil Menghapus Jadwal',
+        description: res.message ?? '',
+        buttonOnTap: () {
+          Get.close(2);
+        },
+      );
+    }
+  }
 }

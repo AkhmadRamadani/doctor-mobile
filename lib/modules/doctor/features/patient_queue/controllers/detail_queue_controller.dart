@@ -56,7 +56,7 @@ class DetailQueueController extends GetxController {
 
     var res = await _repository.approveOrRejectReservation(
       reservationId: item?.id ?? 0,
-      status: 0,
+      status: 1,
     );
 
     DialogService.closeLoading();

@@ -24,7 +24,7 @@ class PatientQueueView extends StatelessWidget {
         title: const Text('Antrian Pasien'),
       ),
       body: DefaultTabController(
-        length: 5,
+        length: 4,
         child: Column(
           children: [
             Container(
@@ -32,12 +32,8 @@ class PatientQueueView extends StatelessWidget {
               child: const TabBar(
                 indicatorColor: Colors.black,
                 labelColor: Colors.black,
-                isScrollable: true,
                 unselectedLabelColor: Colors.grey,
                 tabs: [
-                  Tab(
-                    text: 'Menunggu Konfirmasi',
-                  ),
                   Tab(
                     text: 'Menunggu',
                   ),
@@ -56,12 +52,6 @@ class PatientQueueView extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  _Body(
-                    controller: Get.put(
-                      PatientQueueControllerWaitingConfirmation(),
-                      tag: 'waiting_confirmation',
-                    ),
-                  ),
                   _Body(
                     controller: Get.put(
                       PatientQueueControllerWaiting(),
