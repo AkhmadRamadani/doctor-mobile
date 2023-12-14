@@ -12,6 +12,7 @@ class ItemAntreanWidget extends StatelessWidget {
     this.activeReservationNumber,
     this.remainingQueue,
     this.status,
+    this.approve,
   });
 
   final int? queueNumber;
@@ -20,6 +21,7 @@ class ItemAntreanWidget extends StatelessWidget {
   final int? activeReservationNumber;
   final int? remainingQueue;
   final int? status;
+  final int? approve;
 
   @override
   Widget build(BuildContext context) {
@@ -121,9 +123,11 @@ class ItemAntreanWidget extends StatelessWidget {
                           height: 4.h,
                         ),
                         Text(
-                          queueNumber == activeReservationNumber
-                              ? 'Giliran Anda'
-                              : (activeReservationNumber ?? 0).toString(),
+                          activeReservationNumber == null
+                              ? '-'
+                              : queueNumber == activeReservationNumber
+                                  ? 'Giliran Anda'
+                                  : "No. Antrian: ${activeReservationNumber ?? '-'}",
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontSize: 14.sp,
@@ -151,7 +155,13 @@ class ItemAntreanWidget extends StatelessWidget {
                           height: 4.h,
                         ),
                         Text(
-                          (remainingQueue ?? 0).toString(),
+                          remainingQueue == null
+                              ? 'Selanjutnya Anda'
+                              : remainingQueue == 0
+                                  ? 'Sekarang'
+                                  : remainingQueue == 1
+                                      ? '1 Antrian'
+                                      : '$remainingQueue Antrian',
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontSize: 14.sp,
@@ -170,56 +180,75 @@ class ItemAntreanWidget extends StatelessWidget {
         Positioned(
           top: 0,
           right: 0,
-          child: ConditionalSwitch.single(
+          child: Conditional.single(
             context: context,
-            valueBuilder: (context) => status,
-            caseBuilders: {
-              // 0 Menunggu
-              // 1 Proses
-
-              0: (context) => Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.grey.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Text(
-                      'Menunggu Konfirmasi',
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ),
-              1: (context) => Container(
-                    padding: const EdgeInsets.all(8),
-                    decoration: BoxDecoration(
-                      color: Colors.blue.withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(4),
-                    ),
-                    child: Text(
-                      'Proses',
-                      style: TextStyle(
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w700,
-                        color: Colors.blue,
-                      ),
-                    ),
-                  ),
-            },
-            fallbackBuilder: (context) => Container(
+            conditionBuilder: (_) => approve == 0,
+            widgetBuilder: (_) => Container(
               padding: const EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Colors.grey.withOpacity(0.2),
+                color: Colors.red.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(4),
               ),
               child: Text(
-                'Selesai',
+                'Menunggu Konfirmasi',
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w700,
-                  color: Colors.grey,
+                  color: Colors.red,
+                ),
+              ),
+            ),
+            fallbackBuilder: (_) => ConditionalSwitch.single(
+              context: context,
+              valueBuilder: (context) => status,
+              caseBuilders: {
+                // 0 Menunggu
+                // 1 Proses
+
+                0: (context) => Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        'Menunggu',
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.grey,
+                        ),
+                      ),
+                    ),
+                1: (context) => Container(
+                      padding: const EdgeInsets.all(8),
+                      decoration: BoxDecoration(
+                        color: Colors.blue.withOpacity(0.2),
+                        borderRadius: BorderRadius.circular(4),
+                      ),
+                      child: Text(
+                        'Proses',
+                        style: TextStyle(
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.blue,
+                        ),
+                      ),
+                    ),
+              },
+              fallbackBuilder: (context) => Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.2),
+                  borderRadius: BorderRadius.circular(4),
+                ),
+                child: Text(
+                  'Selesai',
+                  style: TextStyle(
+                    fontSize: 12.sp,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.grey,
+                  ),
                 ),
               ),
             ),

@@ -56,6 +56,45 @@ class DetailQueueController extends GetxController {
 
     var res = await _repository.approveOrRejectReservation(
       reservationId: item?.id ?? 0,
+      status: 0,
+    );
+
+    DialogService.closeLoading();
+
+    if (res.statusCode != 200) {
+      DialogService.showDialogProblem(
+        title: 'Gagal Menerima Antrian',
+        description: res.message ?? 'Terjadi kesalahan saat menerima antrian.',
+      );
+      return;
+    }
+
+    await DialogService.showDialogSuccess(
+      title: 'Berhasil Menerima Antrian',
+      description: 'Antrian berhasil diterima.',
+    );
+
+    Get.back();
+  }
+
+  void prosesQueue() {
+    DialogService.showDialogChoice(
+      description: 'Apakah anda yakin ingin memproses antrian ini?',
+      textNegativeButton: 'Tidak',
+      textPositiveButton: 'Ya',
+      onTapNegativeButton: () => Get.back(),
+      onTapPositiveButton: () {
+        Get.back();
+        prosesQueueChallenge();
+      },
+    );
+  }
+
+  Future<void> prosesQueueChallenge() async {
+    DialogService.showLoading();
+
+    var res = await _repository.approveOrRejectReservation(
+      reservationId: item?.id ?? 0,
       status: 1,
     );
 

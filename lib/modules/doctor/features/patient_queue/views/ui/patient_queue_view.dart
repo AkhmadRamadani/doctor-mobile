@@ -6,6 +6,7 @@ import 'package:doctor_mobile/modules/doctor/features/patient_queue/controllers/
 import 'package:doctor_mobile/modules/doctor/features/patient_queue/controllers/patient_queue_controller_process.dart';
 import 'package:doctor_mobile/modules/doctor/features/patient_queue/controllers/patient_queue_controller_rejected.dart';
 import 'package:doctor_mobile/modules/doctor/features/patient_queue/controllers/patient_queue_controller_waiting.dart';
+import 'package:doctor_mobile/modules/doctor/features/patient_queue/controllers/patient_queue_controller_waiting_confirmation.dart';
 import 'package:doctor_mobile/modules/doctor/features/patient_queue/models/responses/get_all_reservations_response.dart';
 import 'package:doctor_mobile/modules/doctor/features/patient_queue/views/ui/components/patient_queue_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,7 @@ class PatientQueueView extends StatelessWidget {
         title: const Text('Antrian Pasien'),
       ),
       body: DefaultTabController(
-        length: 4,
+        length: 5,
         child: Column(
           children: [
             Container(
@@ -31,8 +32,12 @@ class PatientQueueView extends StatelessWidget {
               child: const TabBar(
                 indicatorColor: Colors.black,
                 labelColor: Colors.black,
+                isScrollable: true,
                 unselectedLabelColor: Colors.grey,
                 tabs: [
+                  Tab(
+                    text: 'Menunggu Konfirmasi',
+                  ),
                   Tab(
                     text: 'Menunggu',
                   ),
@@ -51,6 +56,12 @@ class PatientQueueView extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
+                  _Body(
+                    controller: Get.put(
+                      PatientQueueControllerWaitingConfirmation(),
+                      tag: 'waiting_confirmation',
+                    ),
+                  ),
                   _Body(
                     controller: Get.put(
                       PatientQueueControllerWaiting(),

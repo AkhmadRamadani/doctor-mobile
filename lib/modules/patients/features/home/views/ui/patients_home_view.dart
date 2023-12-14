@@ -178,6 +178,7 @@ class PatientsHomeView extends StatelessWidget {
                                         remainingQueue:
                                             data[index].aheadReservation,
                                         status: data[index].status,
+                                        approve: data[index].approve,
                                       ),
                                     ),
                                   );

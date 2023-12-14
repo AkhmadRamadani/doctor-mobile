@@ -11,12 +11,14 @@ class PatientQueueRepository extends GlobalRepositoryService {
     int? page,
     int? limit,
     int? status,
+    int approve = 1,
   }) async {
     try {
       var query = {
         'page': page,
         'limit': limit,
         'status': status,
+        'approve': approve,
       };
 
       Response res = await ApiServices.call().get(
