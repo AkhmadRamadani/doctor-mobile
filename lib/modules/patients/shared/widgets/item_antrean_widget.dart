@@ -69,7 +69,7 @@ class ItemAntreanWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'dr. ${doctorName ?? '-'}',
+                          '${doctorName ?? '-'}',
                           textAlign: TextAlign.left,
                           style: TextStyle(
                             fontSize: 14.sp,
