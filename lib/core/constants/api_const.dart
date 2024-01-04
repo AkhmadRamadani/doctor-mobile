@@ -1,6 +1,6 @@
 class ApiConst {
   ApiConst._();
-  static const String baseUrl = "http://dokterkuapp.my.id/";
+  static const String baseUrl = "https://dokterkuapp.my.id/api/";
 
   static const String login = "auth/login";
   static const String register = "auth/register";
