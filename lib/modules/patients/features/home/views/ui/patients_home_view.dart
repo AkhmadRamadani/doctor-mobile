@@ -110,7 +110,7 @@ class PatientsHomeView extends StatelessWidget {
                           crossAxisCount: 2,
                           mainAxisSpacing: 0,
                           crossAxisSpacing: 0,
-                          childAspectRatio: 1,
+                          childAspectRatio: 0.9,
                         ),
                         itemCount: controller.listMenu.length,
                         physics: const BouncingScrollPhysics(),

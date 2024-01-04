@@ -328,7 +328,7 @@ class PrivateInformationController extends GetxController {
 
   Container _showForgetPinModal() {
     return Container(
-      height: 0.55.sh,
+      height: 0.6.sh,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(
@@ -644,7 +644,7 @@ class PrivateInformationController extends GetxController {
 
   Container _showPinModalUpdate() {
     return Container(
-      height: 0.5.sh,
+      height: 0.6.sh,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.only(

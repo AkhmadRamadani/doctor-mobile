@@ -1,4 +1,3 @@
-
 import 'package:doctor_mobile/core/constants/color_const.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
