@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "730414814436",
+    "project_id": "docmob-app",
+    "storage_bucket": "docmob-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:730414814436:android:27b4e5961c140a36d2c8f1",
+        "android_client_info": {
+          "package_name": "com.docmob.id.doctor_mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPPoys7lVPXsFcCixWVGZ9H7OSSv0Xj5k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

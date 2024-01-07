@@ -3,7 +3,9 @@ import 'package:doctor_mobile/core/extensions/date_extensions.dart';
 import 'package:doctor_mobile/core/helpers/default_response_helper.dart';
 import 'package:doctor_mobile/core/services/dialog_service.dart';
 import 'package:doctor_mobile/core/services/hive_service.dart';
+import 'package:doctor_mobile/core/services/messaging_service.dart';
 import 'package:doctor_mobile/core/state/ui_state_model/ui_state_model.dart';
+import 'package:doctor_mobile/modules/login/models/response/login_response.dart';
 import 'package:doctor_mobile/modules/profile/models/presentation_models/user_profile_model.dart';
 import 'package:doctor_mobile/modules/profile/models/responses/get_current_user_response.dart';
 import 'package:doctor_mobile/modules/profile/repositories/profile_repository.dart';
@@ -128,7 +130,8 @@ class ProfileController extends GetxController {
     DialogService.showLoading();
 
     DefaultResponseHelper response = await repository.logout();
-
+    User user = await repository.getCurrentUser();
+    MessagingService().unsubscribeFromTopic(user.id.toString());
     DialogService.closeLoading();
 
     if (response.statusCode != 200) {

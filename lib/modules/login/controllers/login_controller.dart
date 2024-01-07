@@ -1,5 +1,6 @@
 import 'package:doctor_mobile/core/routes/app_routes.dart';
 import 'package:doctor_mobile/core/services/dialog_service.dart';
+import 'package:doctor_mobile/core/services/messaging_service.dart';
 import 'package:doctor_mobile/modules/login/repositories/login_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -43,6 +44,8 @@ class LoginController extends GetxController {
 
       return;
     }
+
+    MessagingService().subscribeToTopic(response.user!.id!.toString());
 
     Get.offAllNamed(AppRoutes.dashboard);
   }
